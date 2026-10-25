@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-cream-100 text-ink-800 font-body;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(194, 24, 91, 0.045) 0%, transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(212, 160, 23, 0.06) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(47, 167, 128, 0.03) 0%, transparent 55%),
+      linear-gradient(180deg, #FBF8F2 0%, #F5EFE4 100%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: #D4A017;
+    color: #FFFFFF;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-gold-500 ring-offset-2 ring-offset-cream-100;
+  }
+}
+
+@layer components {
+  .section-wrap {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-ember-600 font-semibold;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-10 bg-ember-500/60;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white bg-ember-gradient shadow-[0_10px_32px_-10px_rgba(194,24,91,0.5)] transition hover:shadow-[0_14px_40px_-10px_rgba(194,24,91,0.6)] hover:-translate-y-0.5;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wider text-ink-900 bg-gold-gradient shadow-[0_10px_32px_-10px_rgba(212,160,23,0.5)] transition hover:shadow-[0_14px_40px_-10px_rgba(212,160,23,0.6)] hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wider text-ink-800 border border-cream-400 bg-white transition hover:border-ember-500 hover:text-ember-600 hover:shadow-sm;
+  }
+  .card {
+    @apply relative rounded-2xl border border-cream-300 bg-white overflow-hidden shadow-[0_1px_3px_rgba(74,65,58,0.04),0_8px_32px_-16px_rgba(74,65,58,0.08)];
+  }
+  .card-hover {
+    @apply transition hover:border-ember-500/50 hover:shadow-[0_4px_12px_rgba(74,65,58,0.06),0_16px_40px_-16px_rgba(194,24,91,0.15)] hover:-translate-y-1;
+  }
+  .divider-glow {
+    background: linear-gradient(90deg, transparent 0%, rgba(194, 24, 91, 0.4) 50%, transparent 100%);
+    height: 1px;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.text-shine {
+  background: linear-gradient(90deg, #820B38 0%, #A41148 25%, #C2185B 50%, #A41148 75%, #820B38 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+.text-ember-shine {
+  background: linear-gradient(90deg, #A41148 0%, #C2185B 50%, #A41148 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #F5EFE4; }
+::-webkit-scrollbar-thumb { background: #CFC2A3; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #D4A017; }
