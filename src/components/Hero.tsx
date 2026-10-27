@@ -16,8 +16,8 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Alumni gathering',
+    src: '/slides/slide-1.jpg',
+    alt: 'RT2000 Mother’s Day celebration',
     eyebrow: 'SSC 2000 — Alumni Platform',
     title: (
       <>
@@ -28,7 +28,7 @@ const slides: Slide[] = [
         <span className="text-shine">Difference Makers.</span>
       </>
     ),
-    copy: 'A friendship that grew into a network — where knowledge, leadership, and social good meet.'
+    copy: 'A friendship that grew into a family — honoring our mothers, our bonds, and a legacy built together.'
   },
   {
     src: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1920&q=80',
