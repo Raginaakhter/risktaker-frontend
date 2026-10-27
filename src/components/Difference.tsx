@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Sprout, UsersRound, Compass } from 'lucide-react';
 import Reveal from './motion/Reveal';
@@ -51,7 +52,7 @@ export default function Difference() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 20%, rgba(251,248,242,0.65) 65%, rgba(251,248,242,0.95) 100%)'
+            'radial-gradient(ellipse at center, transparent 20%, rgba(10,8,6,0.75) 65%, rgba(10,8,6,0.95) 100%)'
         }}
       />
 
@@ -106,8 +107,37 @@ export default function Difference() {
           })}
         </Stagger>
 
-        <Reveal delay={0.2}>
-          <div className="mt-14 card p-6 md:p-7 flex flex-wrap items-center justify-between gap-5 bg-gradient-to-r from-jade-500/8 via-cream-100 to-gold-500/8 border-jade-500/30">
+        <Reveal delay={0.15}>
+          <figure className="mt-14 relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-[0_20px_60px_-20px_rgba(255,122,26,0.35),0_0_0_1px_rgba(212,160,23,0.15)] bg-cream-200">
+            <div className="relative aspect-[16/9] w-full">
+              <Image
+                src="/slides/difference-summit.jpg"
+                alt="Risk Taker Leadership Summit 2025"
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold-500/20" />
+            </div>
+            <figcaption className="absolute bottom-0 inset-x-0 p-5 md:p-7 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-gold-400 font-semibold">
+                  Flagship Event
+                </div>
+                <div className="mt-1 font-display text-xl md:text-2xl text-white tracking-tight">
+                  Risk Taker Leadership Summit 2025
+                </div>
+              </div>
+              <div className="text-xs text-white/75 max-w-xs md:text-right">
+                Development · Learning · Mindset · Improvement · Transformation
+              </div>
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal delay={0.25}>
+          <div className="mt-10 card p-6 md:p-7 flex flex-wrap items-center justify-between gap-5 bg-gradient-to-r from-jade-500/8 via-cream-100 to-gold-500/8 border-jade-500/30">
             <div className="flex items-center gap-4">
               <motion.div
                 whileHover={{ rotate: 360 }}
