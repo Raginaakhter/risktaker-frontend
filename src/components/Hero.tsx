@@ -97,7 +97,7 @@ export default function Hero() {
   const [paused, setPaused] = useState(false);
 
   const go = useCallback(
-    (n: number) => setIndex((prev) => (n + slides.length) % slides.length),
+    (n: number) => setIndex((n + slides.length) % slides.length),
     []
   );
   const next = useCallback(() => go(index + 1), [go, index]);
