@@ -77,7 +77,7 @@ export default function MembersDirectory() {
                 placeholder="Search by name, profession, organization or city…"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full h-12 pl-11 pr-10 rounded-full bg-white border border-cream-300 text-ink-900 placeholder:text-ink-400 text-sm focus:border-ember-500 transition shadow-sm"
+                className="w-full h-12 pl-11 pr-10 rounded-full bg-cream-300border border-cream-300 text-ink-900 placeholder:text-ink-400 text-sm focus:border-ember-500 transition shadow-sm"
               />
               {query && (
                 <button
@@ -174,7 +174,7 @@ function FilterPill({
       className={`inline-flex items-center gap-2 px-4 h-9 rounded-full text-xs uppercase tracking-widest font-medium transition ${
         active
           ? 'bg-ember-gradient text-white shadow-[0_6px_18px_-6px_rgba(194,24,91,0.5)]'
-          : 'border border-cream-400 bg-white text-ink-700 hover:text-ember-600 hover:border-ember-400'
+          : 'border border-cream-400 bg-cream-300text-ink-700 hover:text-ember-600 hover:border-ember-400'
       }`}
     >
       {label}
@@ -261,14 +261,14 @@ function MemberModal({ member, onClose }: { member: Member; onClose: () => void 
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.95 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full max-w-lg bg-white border border-cream-300 rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl"
+        className="w-full max-w-lg bg-cream-300border border-cream-300 rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative p-6 bg-gradient-to-br from-cream-200 via-cream-100 to-white">
           <motion.button
             whileHover={{ rotate: 90, scale: 1.1 }}
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white border border-cream-400 flex items-center justify-center text-ink-600 hover:text-ink-900 shadow-sm"
+            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-cream-300border border-cream-400 flex items-center justify-center text-ink-600 hover:text-ink-900 shadow-sm"
           >
             <X size={14} />
           </motion.button>
@@ -327,10 +327,10 @@ function MemberModal({ member, onClose }: { member: Member; onClose: () => void 
                   </div>
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                  <div className="flex items-center gap-2 text-ink-400 border border-cream-300 bg-white rounded-lg px-3 py-2">
+                  <div className="flex items-center gap-2 text-ink-400 border border-cream-300 bg-cream-300rounded-lg px-3 py-2">
                     <Phone size={12} /> ••• ••• ••••
                   </div>
-                  <div className="flex items-center gap-2 text-ink-400 border border-cream-300 bg-white rounded-lg px-3 py-2">
+                  <div className="flex items-center gap-2 text-ink-400 border border-cream-300 bg-cream-300rounded-lg px-3 py-2">
                     <Mail size={12} /> hidden@rt2000
                   </div>
                 </div>

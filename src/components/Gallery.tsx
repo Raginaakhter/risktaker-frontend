@@ -50,10 +50,10 @@ export default function Gallery() {
               </h2>
             </div>
             <div className="flex gap-2">
-              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-ink-600 border border-cream-400 bg-white rounded-full px-3 py-1.5">
+              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-ink-600 border border-cream-400 bg-cream-300rounded-full px-3 py-1.5">
                 <Camera size={12} /> 2,400+ photos
               </span>
-              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-ink-600 border border-cream-400 bg-white rounded-full px-3 py-1.5">
+              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-ink-600 border border-cream-400 bg-cream-300rounded-full px-3 py-1.5">
                 <PlayCircle size={12} /> 48 reels
               </span>
             </div>

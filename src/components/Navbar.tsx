@@ -34,8 +34,8 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/85 backdrop-blur-xl border-b border-cream-300 shadow-[0_4px_24px_-16px_rgba(74,65,58,0.25)]'
-          : 'bg-transparent'
+          ? 'bg-black/85 backdrop-blur-xl border-b border-gold-500/30 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.6)]'
+          : 'bg-gradient-to-b from-black/70 via-black/40 to-transparent backdrop-blur-sm'
       }`}
     >
       <div className="section-wrap flex items-center justify-between py-3 md:py-4">
@@ -51,7 +51,7 @@ export default function Navbar() {
             width={240}
             height={128}
             priority
-            className="h-11 md:h-14 w-auto drop-shadow-[0_4px_12px_rgba(74,65,58,0.2)] group-hover:drop-shadow-[0_6px_18px_rgba(212,160,23,0.35)] transition"
+            className="h-12 md:h-16 w-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] group-hover:drop-shadow-[0_6px_18px_rgba(255,122,26,0.55)] transition"
           />
         </motion.a>
 
@@ -64,10 +64,10 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 + i * 0.05, duration: 0.4 }}
               whileHover={{ y: -2 }}
-              className="text-sm font-medium text-ink-700 hover:text-ember-600 transition relative group"
+              className="text-sm font-semibold text-white hover:text-gold-400 transition relative group drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]"
             >
               {n.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-ember-500 transition-all group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-400 transition-all group-hover:w-full" />
             </motion.a>
           ))}
         </nav>
@@ -83,7 +83,7 @@ export default function Navbar() {
           </motion.a>
           <button
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden p-2 rounded-md border border-cream-400 bg-white text-ink-800"
+            className="lg:hidden p-2 rounded-md border border-gold-500/40 bg-black/60 backdrop-blur-md text-white"
             aria-label="Toggle menu"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
@@ -98,7 +98,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden border-t border-cream-300 bg-white/95 backdrop-blur-xl overflow-hidden"
+            className="lg:hidden border-t border-gold-500/30 bg-black/95 backdrop-blur-xl overflow-hidden"
           >
             <nav className="section-wrap flex flex-col py-4 gap-1">
               {nav.map((n, i) => (
@@ -109,7 +109,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04 }}
                   onClick={() => setOpen(false)}
-                  className="py-3 px-2 text-sm text-ink-800 hover:text-ember-600 border-b border-cream-300"
+                  className="py-3 px-2 text-sm text-white hover:text-gold-400 border-b border-gold-500/20"
                 >
                   {n.label}
                 </motion.a>

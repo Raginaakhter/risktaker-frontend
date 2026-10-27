@@ -87,7 +87,7 @@ export default function JoinUs() {
                     className={`text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border transition ${
                       cat === c
                         ? 'bg-ember-gradient text-white border-transparent'
-                        : 'border-cream-400 bg-white text-ink-700 hover:border-ember-400 hover:text-ember-600'
+                        : 'border-cream-400 bg-cream-300text-ink-700 hover:border-ember-400 hover:text-ember-600'
                     }`}
                   >
                     {c}
@@ -103,7 +103,7 @@ export default function JoinUs() {
               <textarea
                 rows={3}
                 placeholder="Tell us about your work, interests, how you want to contribute…"
-                className="w-full rounded-xl bg-white border border-cream-300 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ember-500 transition resize-none"
+                className="w-full rounded-xl bg-cream-300border border-cream-300 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ember-500 transition resize-none"
               />
             </div>
 
@@ -156,7 +156,7 @@ function Field({
           placeholder={placeholder}
           defaultValue={defaultValue}
           readOnly={readOnly}
-          className="w-full h-11 pl-9 pr-3 rounded-lg bg-white border border-cream-300 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ember-500 transition read-only:text-ink-500"
+          className="w-full h-11 pl-9 pr-3 rounded-lg bg-cream-300border border-cream-300 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ember-500 transition read-only:text-ink-500"
         />
       </div>
     </label>
