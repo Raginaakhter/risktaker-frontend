@@ -166,7 +166,7 @@ export default function Events() {
                   <motion.div
                     key={c}
                     whileHover={{ x: 4, backgroundColor: '#FBF8F2' }}
-                    className="flex items-center justify-between py-2.5 px-3 rounded-lg border border-cream-300 bg-cream-300text-sm text-ink-800 cursor-pointer"
+                    className="flex items-center justify-between py-2.5 px-3 rounded-lg border border-cream-300 bg-cream-300 text-sm text-ink-800 cursor-pointer"
                   >
                     <span>{c}</span>
                     <ChevronRight size={14} className="text-ink-500" />
