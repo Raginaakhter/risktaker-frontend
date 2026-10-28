@@ -20,36 +20,23 @@ type Episode = {
 
 const episodes: Episode[] = [
   {
-    series: 'The Person Behind the Profession',
-    title: 'Rebuilding a career after a decade in a different field',
-    guest: 'Dr. Mahbubul Alam',
-    role: 'Medicine & Haematology Specialist',
-    duration: '48 min',
-    tag: 'Latest',
+    series: 'RT Podcast',
+    title: 'Episode 01 — Risk Taker 2000 Podcast',
+    guest: 'RT 2000 Members',
+    role: 'Opening conversation',
+    duration: 'Full episode',
+    tag: 'Episode 01',
     poster: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1600&q=80',
     videoSrc: '/videos/RT_PODCAST_EP_01.mp4'
   },
   {
-    series: 'Risk, Failure & Success',
-    title: 'When the first business failed — and what came next',
-    guest: 'Shahzada Siddiqui Polash',
-    role: 'National Bank Ltd.',
-    duration: '41 min',
+    series: 'RT Podcast',
+    title: 'Episode 02 — Risk Taker 2000 Podcast',
+    guest: 'RT 2000 Members',
+    role: 'Follow-up conversation',
+    duration: 'Full episode',
+    tag: 'Episode 02',
     videoSrc: '/videos/RT_PODCAST_EP_02.mp4'
-  },
-  {
-    series: 'Leadership in Action',
-    title: 'Leading a team of 80 doctors through COVID',
-    guest: 'Dr. Morshed Mymen',
-    role: 'Pediatric Specialist',
-    duration: '55 min'
-  },
-  {
-    series: 'Women in Leadership',
-    title: 'Running a branch, raising a family, no apologies',
-    guest: 'Tania',
-    role: 'Southeast Bank, Iskaton Branch',
-    duration: '36 min'
   }
 ];
 
