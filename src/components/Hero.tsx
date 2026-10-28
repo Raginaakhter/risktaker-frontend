@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
 import Counter from './motion/Counter';
+import { CLD } from '@/lib/cloudinary';
 
 type Slide = {
   src: string;
@@ -16,7 +17,7 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: '/slides/slide-1.jpg',
+    src: CLD.slide1,
     alt: 'RT2000 Mother’s Day celebration',
     eyebrow: 'SSC 2000 — Alumni Platform',
     title: (

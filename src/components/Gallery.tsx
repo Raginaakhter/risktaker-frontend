@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Camera, PlayCircle } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
+import { CLD } from '@/lib/cloudinary';
 
 type Tile = {
   title: string;
@@ -19,7 +20,7 @@ const tiles: Tile[] = [
     title: 'Leadership Summit 2025 — Opening Keynote',
     tag: 'Flagship',
     date: '12 Dec 2025',
-    src: '/slides/difference-summit.jpg',
+    src: CLD.summit,
     big: true
   },
   {
@@ -32,7 +33,7 @@ const tiles: Tile[] = [
     title: 'Mother’s Day Special',
     tag: 'Family',
     date: '11 May 2025',
-    src: '/slides/slide-1.jpg'
+    src: CLD.slide1
   },
   {
     title: 'Reunion Night',

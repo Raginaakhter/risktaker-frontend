@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Sprout, UsersRound, Compass } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
+import { CLD } from '@/lib/cloudinary';
 
 const ThreeShowcase = dynamic(() => import('./ThreeShowcase'), { ssr: false });
 
@@ -111,7 +112,7 @@ export default function Difference() {
           <figure className="mt-14 relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-[0_20px_60px_-20px_rgba(255,122,26,0.35),0_0_0_1px_rgba(212,160,23,0.15)] bg-cream-200">
             <div className="relative aspect-[16/9] w-full">
               <Image
-                src="/slides/difference-summit.jpg"
+                src={CLD.summit}
                 alt="Risk Taker Leadership Summit 2025"
                 fill
                 sizes="(min-width: 1024px) 1024px, 100vw"
