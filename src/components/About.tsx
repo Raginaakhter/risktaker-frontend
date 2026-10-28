@@ -36,6 +36,7 @@ export default function About() {
               <Stagger className="mt-8 grid sm:grid-cols-2 gap-4">
                 <StaggerItem>
                   <PillarCard
+                    id="vision"
                     icon={Target}
                     title="Our Vision"
                     body="A strong, active, values-driven network of SSC 2000 friends where every member grows personally, professionally and in service of society."
@@ -43,6 +44,7 @@ export default function About() {
                 </StaggerItem>
                 <StaggerItem>
                   <PillarCard
+                    id="mission"
                     icon={Compass}
                     title="Our Mission"
                     body="Strengthen friendship. Share knowledge and skill. Encourage business and career networking. Build the next generation through our experience."
@@ -90,19 +92,22 @@ export default function About() {
 }
 
 function PillarCard({
+  id,
   icon: Icon,
   title,
   body
 }: {
+  id?: string;
   icon: typeof Target;
   title: string;
   body: string;
 }) {
   return (
     <motion.div
+      id={id}
       whileHover={{ y: -4, scale: 1.015 }}
       transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-      className="card p-6 h-full"
+      className="card p-6 h-full scroll-mt-24"
     >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-lg bg-ember-500/10 border border-ember-400/40 flex items-center justify-center text-ember-600">
