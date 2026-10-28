@@ -8,3 +8,10 @@ dist
 *.log
 .vscode
 coverage
+
+# Large media files — upload separately to the server on deploy.
+# The site still references /videos/*.mp4; the folder structure lives
+# on the deploy target under public/videos/.
+public/videos/*.mp4
+public/videos/*.mov
+public/videos/*.webm

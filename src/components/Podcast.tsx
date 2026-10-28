@@ -1,26 +1,41 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Mic, Play, Radio, Clock } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Mic, Play, Radio, Clock, X } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
 
-const episodes = [
+type Episode = {
+  series: string;
+  title: string;
+  guest: string;
+  role: string;
+  duration: string;
+  tag?: string;
+  poster?: string;
+  videoSrc?: string;
+};
+
+const episodes: Episode[] = [
   {
     series: 'The Person Behind the Profession',
     title: 'Rebuilding a career after a decade in a different field',
     guest: 'Dr. Mahbubul Alam',
     role: 'Medicine & Haematology Specialist',
     duration: '48 min',
-    tag: 'Latest'
+    tag: 'Latest',
+    poster: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1600&q=80',
+    videoSrc: '/videos/RT_PODCAST_EP_01.mp4'
   },
   {
     series: 'Risk, Failure & Success',
     title: 'When the first business failed — and what came next',
     guest: 'Shahzada Siddiqui Polash',
     role: 'National Bank Ltd.',
-    duration: '41 min'
+    duration: '41 min',
+    videoSrc: '/videos/RT_PODCAST_EP_02.mp4'
   },
   {
     series: 'Leadership in Action',
@@ -48,6 +63,8 @@ const series = [
 ];
 
 export default function Podcast() {
+  const [modalEp, setModalEp] = useState<Episode | null>(null);
+
   return (
     <section id="podcast" className="relative py-24 md:py-32">
       <div className="section-wrap">
@@ -75,7 +92,7 @@ export default function Podcast() {
           <Stagger className="grid gap-4" stagger={0.08}>
             {episodes.slice(1).map((ep) => (
               <StaggerItem key={ep.title}>
-                <EpisodeRow ep={ep} />
+                <EpisodeRow ep={ep} onPlay={() => setModalEp(ep)} />
               </StaggerItem>
             ))}
           </Stagger>
@@ -108,42 +125,63 @@ export default function Podcast() {
           </Stagger>
         </div>
       </div>
+
+      <VideoModal ep={modalEp} onClose={() => setModalEp(null)} />
     </section>
   );
 }
 
-function FeaturedEpisode({ ep }: { ep: (typeof episodes)[number] }) {
+function FeaturedEpisode({ ep }: { ep: Episode }) {
+  const [playing, setPlaying] = useState(false);
+
   return (
     <motion.div
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ scale: playing ? 1 : 1.01 }}
       transition={{ type: 'spring', stiffness: 240, damping: 20 }}
       className="card bg-gradient-to-br from-ember-500/8 via-cream-100 to-cream-200 border-ember-400/30 relative overflow-hidden"
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1600&q=80"
-          alt="RT Podcast studio"
-          fill
-          sizes="(min-width: 1024px) 720px, 100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-bold text-white bg-ember-500/90 border border-ember-400/70 px-2 py-1 rounded">
-            <Radio size={10} /> {ep.tag ?? 'Episode'}
-          </span>
-          <span className="text-[10px] uppercase tracking-widest text-white/85 drop-shadow">
-            {ep.series}
-          </span>
-        </div>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-ember-gradient text-white flex items-center justify-center shadow-[0_8px_28px_-6px_rgba(255,122,26,0.65)]"
-          aria-label="Play episode"
-        >
-          <Play size={24} fill="currentColor" />
-        </motion.button>
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
+        {playing && ep.videoSrc ? (
+          <video
+            src={ep.videoSrc}
+            poster={ep.poster}
+            controls
+            autoPlay
+            playsInline
+            className="absolute inset-0 w-full h-full bg-black"
+          />
+        ) : (
+          <>
+            {ep.poster && (
+              <Image
+                src={ep.poster}
+                alt="RT Podcast studio"
+                fill
+                sizes="(min-width: 1024px) 720px, 100vw"
+                className="object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="absolute top-4 left-4 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-bold text-white bg-ember-500/90 border border-ember-400/70 px-2 py-1 rounded">
+                <Radio size={10} /> {ep.tag ?? 'Episode'}
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-white/85 drop-shadow">
+                {ep.series}
+              </span>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => ep.videoSrc && setPlaying(true)}
+              disabled={!ep.videoSrc}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-ember-gradient text-white flex items-center justify-center shadow-[0_8px_28px_-6px_rgba(255,122,26,0.65)] disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Play episode"
+            >
+              <Play size={24} fill="currentColor" />
+            </motion.button>
+          </>
+        )}
       </div>
       <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-ember-400/15 blur-3xl pointer-events-none" />
       <div className="relative p-7">
@@ -161,14 +199,23 @@ function FeaturedEpisode({ ep }: { ep: (typeof episodes)[number] }) {
   );
 }
 
-function EpisodeRow({ ep }: { ep: (typeof episodes)[number] }) {
+function EpisodeRow({ ep, onPlay }: { ep: Episode; onPlay: () => void }) {
+  const hasVideo = !!ep.videoSrc;
   return (
     <motion.button
       whileHover={{ x: 6 }}
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className="card p-5 text-left group flex items-center gap-4 w-full"
+      onClick={hasVideo ? onPlay : undefined}
+      disabled={!hasVideo}
+      className="card p-5 text-left group flex items-center gap-4 w-full disabled:cursor-default"
     >
-      <div className="w-11 h-11 rounded-full border border-cream-400 bg-cream-100 flex items-center justify-center text-ink-700 group-hover:border-ember-500 group-hover:text-ember-600 group-hover:bg-ember-500/5 transition">
+      <div
+        className={`w-11 h-11 rounded-full border flex items-center justify-center transition ${
+          hasVideo
+            ? 'border-ember-500/50 bg-ember-500/10 text-ember-500 group-hover:bg-ember-500 group-hover:text-white group-hover:border-ember-500'
+            : 'border-cream-400 bg-cream-200 text-ink-600'
+        }`}
+      >
         <Play size={14} fill="currentColor" />
       </div>
       <div className="min-w-0 flex-1">
@@ -177,12 +224,79 @@ function EpisodeRow({ ep }: { ep: (typeof episodes)[number] }) {
           {ep.title}
         </div>
         <div className="mt-1 text-xs text-ink-600 truncate">
-          <span className="text-ember-600">{ep.guest}</span> — {ep.role}
+          <span className="text-ember-500">{ep.guest}</span> — {ep.role}
         </div>
       </div>
       <div className="flex items-center gap-1 text-xs text-ink-500 shrink-0">
         <Clock size={10} /> {ep.duration}
       </div>
     </motion.button>
+  );
+}
+
+function VideoModal({ ep, onClose }: { ep: Episode | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!ep) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [ep, onClose]);
+
+  return (
+    <AnimatePresence>
+      {ep && ep.videoSrc && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.92, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl rounded-2xl overflow-hidden border border-gold-500/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] bg-black"
+          >
+            <button
+              onClick={onClose}
+              aria-label="Close video"
+              className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-ember-500 transition"
+            >
+              <X size={18} />
+            </button>
+            <video
+              key={ep.videoSrc}
+              src={ep.videoSrc}
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-auto max-h-[85vh] bg-black"
+            />
+            <div className="p-5 bg-black/95 border-t border-gold-500/20">
+              <div className="text-[10px] uppercase tracking-widest text-gold-400 font-semibold">
+                {ep.series}
+              </div>
+              <div className="mt-1 font-display text-base md:text-lg text-white tracking-tight">
+                {ep.title}
+              </div>
+              <div className="mt-1 text-xs text-white/70">
+                With <span className="text-ember-400">{ep.guest}</span> — {ep.role}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
