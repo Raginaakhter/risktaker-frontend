@@ -26,7 +26,7 @@ const episodes: Episode[] = [
     role: 'Opening conversation',
     duration: 'Full episode',
     tag: 'Episode 01',
-    poster: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1600&q=80',
+    poster: '/slides/377A74A9-802E-481A-AA69-B07360A9C7EC.jpg',
     videoSrc: '/videos/RT_PODCAST_EP_01.mp4'
   },
   {

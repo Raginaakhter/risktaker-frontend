@@ -9,21 +9,22 @@ type NavLeaf = { label: string; href: string; description?: string };
 type NavItem = NavLeaf & { submenu?: NavLeaf[] };
 
 const nav: NavItem[] = [
-  { label: 'Difference', href: '#difference' },
+  { label: 'Difference', href: '/#difference' },
   {
     label: 'About',
-    href: '#about',
+    href: '/#about',
     submenu: [
-      { label: 'Our Mission', href: '#mission', description: 'What we commit to as a batch.' },
-      { label: 'Our Vision', href: '#vision', description: 'Where RT 2000 is heading.' }
+      { label: 'Our Mission', href: '/#mission', description: 'What we commit to as a batch.' },
+      { label: 'Our Vision', href: '/#vision', description: 'Where RT 2000 is heading.' },
+      { label: 'EC Members', href: '/ec-members', description: 'Current and previous executive committees.' }
     ]
   },
-  { label: 'Members', href: '#members' },
-  { label: 'Business', href: '#business' },
-  { label: 'Podcast', href: '#podcast' },
-  { label: 'Events', href: '#events' },
-  { label: 'Knowledge', href: '#knowledge' },
-  { label: 'Impact', href: '#impact' }
+  { label: 'Members', href: '/#members' },
+  { label: 'Business', href: '/#business' },
+  { label: 'Podcast', href: '/#podcast' },
+  { label: 'Events', href: '/#events' },
+  { label: 'Knowledge', href: '/#knowledge' },
+  { label: 'Impact', href: '/#impact' }
 ];
 
 export default function Navbar() {
@@ -64,7 +65,7 @@ export default function Navbar() {
     >
       <div className="section-wrap flex items-center justify-between py-3 md:py-4">
         <motion.a
-          href="#top"
+          href="/#top"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
           className="flex items-center group"
@@ -157,7 +158,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <motion.a
-            href="#join"
+            href="/#join"
             whileHover={{ y: -2, scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="hidden md:inline-flex btn-primary !py-2 !px-5 !text-xs"
@@ -250,7 +251,7 @@ export default function Navbar() {
                 );
               })}
               <a
-                href="#join"
+                href="/#join"
                 className="btn-primary mt-4 w-full"
                 onClick={() => setOpen(false)}
               >

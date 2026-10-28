@@ -32,8 +32,8 @@ const slides: Slide[] = [
     copy: 'A friendship that grew into a family — honoring our mothers, our bonds, and a legacy built together.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Business collaboration',
+    src: '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg',
+    alt: 'RT2000 members networking',
     eyebrow: 'Business · Network · Growth',
     title: (
       <>
@@ -47,8 +47,8 @@ const slides: Slide[] = [
     copy: '60+ members across 12 industries building ventures, sharing deals, and lifting each other up.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1491439592389-3d19fbfdac8c?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Learning and knowledge',
+    src: '/slides/IMG_7461.JPG',
+    alt: 'RT2000 learning and sharing',
     eyebrow: 'Learn · Teach · Share',
     title: (
       <>
@@ -62,8 +62,8 @@ const slides: Slide[] = [
     copy: 'Podcasts, mentorship, and knowledge hubs — the batch of 2000 keeps learning, together.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Community impact',
+    src: '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg',
+    alt: 'RT2000 community service',
     eyebrow: 'Impact · Service · Legacy',
     title: (
       <>
@@ -75,8 +75,8 @@ const slides: Slide[] = [
     copy: 'From health camps to scholarships — real work, real reach, real change in the community.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Events and gatherings',
+    src: '/slides/IMG_7452.JPG',
+    alt: 'RT2000 reunion gathering',
     eyebrow: 'Events · Reunions · Celebrations',
     title: (
       <>

@@ -9,8 +9,6 @@ import { CLD } from '@/lib/cloudinary';
 
 type Tile = {
   title: string;
-  tag: string;
-  date: string;
   src: string;
   big?: boolean;
 };
@@ -18,41 +16,14 @@ type Tile = {
 const tiles: Tile[] = [
   {
     title: 'Leadership Summit 2025 — Opening Keynote',
-    tag: 'Flagship',
-    date: '12 Dec 2025',
     src: CLD.summit,
     big: true
   },
-  {
-    title: 'Fruit Festival',
-    tag: 'Family',
-    date: '18 Jun 2025',
-    src: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=1200&q=80'
-  },
-  {
-    title: 'Mother’s Day Special',
-    tag: 'Family',
-    date: '11 May 2025',
-    src: CLD.slide1
-  },
-  {
-    title: 'Reunion Night',
-    tag: 'Community',
-    date: '28 Feb 2025',
-    src: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80'
-  },
-  {
-    title: 'Blood Donation Camp — Dhanmondi',
-    tag: 'Impact',
-    date: '04 Oct 2025',
-    src: 'https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1200&q=80'
-  },
-  {
-    title: 'RT Podcast — Studio Day',
-    tag: 'Podcast',
-    date: '20 Aug 2025',
-    src: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80'
-  }
+  { title: 'Fruit Festival', src: '/slides/IMG_7452.JPG' },
+  { title: 'Mother’s Day Special', src: CLD.slide1 },
+  { title: 'Reunion Night', src: '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg' },
+  { title: 'Blood Donation Camp — Dhanmondi', src: '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg' },
+  { title: 'RT Podcast — Studio Day', src: '/slides/377A74A9-802E-481A-AA69-B07360A9C7EC.jpg' }
 ];
 
 const headlines = [
@@ -144,20 +115,6 @@ function GalleryTile({ tile }: { tile: Tile }) {
         sizes="(min-width: 1024px) 480px, (min-width: 768px) 33vw, 50vw"
         className="object-cover transition duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-4">
-        <div className="text-[9px] uppercase tracking-widest text-gold-400 font-semibold">
-          {tile.tag}
-        </div>
-        <div
-          className={`font-display tracking-wide text-white leading-snug mt-1 ${
-            tile.big ? 'text-xl' : 'text-sm'
-          }`}
-        >
-          {tile.title}
-        </div>
-        <div className="mt-1 text-[10px] text-white/70">{tile.date}</div>
-      </div>
     </motion.article>
   );
 }
