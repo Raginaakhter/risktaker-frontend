@@ -1,12 +1,23 @@
 'use client';
 
+import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Sprout, UsersRound, Compass } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Sprout, UsersRound, Compass, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
 import { CLD } from '@/lib/cloudinary';
+
+const summitSlides = [
+  CLD.summit,
+  CLD.slide1,
+  '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg',
+  '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg',
+  '/slides/IMG_7452.JPG',
+  '/slides/IMG_7461.JPG'
+];
+const SUMMIT_AUTOPLAY_MS = 4500;
 
 const ThreeShowcase = dynamic(() => import('./ThreeShowcase'), { ssr: false });
 
@@ -109,32 +120,7 @@ export default function Difference() {
         </Stagger>
 
         <Reveal delay={0.15}>
-          <figure className="mt-14 relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-[0_20px_60px_-20px_rgba(255,122,26,0.35),0_0_0_1px_rgba(212,160,23,0.15)] bg-cream-200">
-            <div className="relative aspect-[16/9] w-full">
-              <Image
-                src={CLD.summit}
-                alt="Risk Taker Leadership Summit 2025"
-                fill
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                className="object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold-500/20" />
-            </div>
-            <figcaption className="absolute bottom-0 inset-x-0 p-5 md:p-7 flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <div className="text-[10px] uppercase tracking-[0.3em] text-gold-400 font-semibold">
-                  Flagship Event
-                </div>
-                <div className="mt-1 font-display text-xl md:text-2xl text-white tracking-tight">
-                  Risk Taker Leadership Summit 2025
-                </div>
-              </div>
-              <div className="text-xs text-white/75 max-w-xs md:text-right">
-                Development · Learning · Mindset · Improvement · Transformation
-              </div>
-            </figcaption>
-          </figure>
+          <SummitCarousel />
         </Reveal>
 
         <Reveal delay={0.25}>
@@ -168,5 +154,103 @@ export default function Difference() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function SummitCarousel() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = summitSlides.length;
+
+  const go = useCallback((n: number) => setIndex(((n % total) + total) % total), [total]);
+  const next = useCallback(() => go(index + 1), [go, index]);
+  const prev = useCallback(() => go(index - 1), [go, index]);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(next, SUMMIT_AUTOPLAY_MS);
+    return () => clearTimeout(t);
+  }, [index, paused, next]);
+
+  return (
+    <figure
+      className="group mt-14 relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-[0_20px_60px_-20px_rgba(255,122,26,0.35),0_0_0_1px_rgba(212,160,23,0.15)] bg-cream-200"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="relative aspect-[16/9] w-full overflow-hidden">
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={summitSlides[index]}
+              alt="Risk Taker Leadership Summit 2025"
+              fill
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold-500/20" />
+
+        <button
+          onClick={prev}
+          aria-label="Previous slide"
+          className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 md:h-11 md:w-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-md text-white flex items-center justify-center transition hover:bg-black/60 hover:scale-105 opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next slide"
+          className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 md:h-11 md:w-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-md text-white flex items-center justify-center transition hover:bg-black/60 hover:scale-105 opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+        >
+          <ChevronRight size={18} />
+        </button>
+
+        <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5">
+          {summitSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="group/dot relative h-1.5 w-7 rounded-full overflow-hidden bg-white/25"
+            >
+              <span
+                className={`absolute inset-y-0 left-0 bg-gold-400 transition-all ${
+                  i === index ? 'w-full' : 'w-0 group-hover/dot:w-1/3'
+                }`}
+                style={
+                  i === index && !paused
+                    ? { transition: `width ${SUMMIT_AUTOPLAY_MS}ms linear` }
+                    : undefined
+                }
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <figcaption className="absolute bottom-0 inset-x-0 p-5 md:p-7 flex flex-wrap items-end justify-between gap-3 z-10">
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.3em] text-gold-400 font-semibold">
+            Flagship Event
+          </div>
+          <div className="mt-1 font-display text-xl md:text-2xl text-white tracking-tight">
+            Risk Taker Leadership Summit 2025
+          </div>
+        </div>
+        <div className="text-xs text-white/75 max-w-xs md:text-right">
+          Development · Learning · Mindset · Improvement · Transformation
+        </div>
+      </figcaption>
+    </figure>
   );
 }

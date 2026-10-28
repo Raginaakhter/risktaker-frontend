@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Crown, Users2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -116,19 +117,29 @@ function ECMemberCard({
       }`}
     >
       {isPresident && (
-        <div className="absolute top-3 right-3 text-ember-500">
+        <div className="absolute top-3 right-3 text-ember-500 z-10">
           <Crown size={14} />
         </div>
       )}
       <div className="flex items-start gap-4">
         <div
-          className={`w-14 h-14 shrink-0 rounded-xl flex items-center justify-center font-display text-lg tracking-wider border ${
+          className={`w-16 h-20 shrink-0 rounded-xl overflow-hidden relative flex items-center justify-center font-display text-lg tracking-wider border ${
             highlight
               ? 'bg-gradient-to-br from-ember-500/15 to-gold-500/10 border-ember-400/40 text-ember-700'
               : 'bg-cream-200 border-cream-400 text-ink-700'
           }`}
         >
-          {initialsOf(member.name)}
+          {member.photo ? (
+            <Image
+              src={member.photo}
+              alt={member.name}
+              fill
+              sizes="64px"
+              className="object-cover object-top"
+            />
+          ) : (
+            initialsOf(member.name)
+          )}
         </div>
         <div className="min-w-0 flex-1">
           <div className="font-display tracking-wide text-ink-900 text-base leading-tight">

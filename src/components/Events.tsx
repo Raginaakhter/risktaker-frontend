@@ -5,46 +5,46 @@ import { Calendar, MapPin, ChevronRight, Users } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
 
-const upcoming = [
+type EventItem = {
+  date: string;
+  day: string;
+  month: string;
+  title: string;
+  tag: string;
+  tagColor: string;
+  venue?: string;
+  attendees?: number;
+  href?: string;
+};
+
+const upcoming: EventItem[] = [
   {
-    date: '2026-11-28',
-    day: '28',
-    month: 'Nov',
-    title: 'Leadership Summit 2026 — Let\'s Fly for the Future',
-    venue: 'Krishibid Institution Bangladesh, Dhaka',
+    date: '2026-10-30',
+    day: '30',
+    month: 'Oct',
+    title: 'Leadership Summit 2026 — Let\'s Fly to take better decisions',
     tag: 'Flagship',
     tagColor: 'bg-ember-500/15 border-ember-500/40 text-ember-700',
-    attendees: 180
+    attendees: 75,
+    href: '/events/leadership-summit-2026'
   },
   {
-    date: '2026-12-05',
+    date: '2026-11-05',
     day: '05',
-    month: 'Dec',
-    title: 'RT Live — AI, Doctors and Diagnosis Tools',
+    month: 'Nov',
+    title: 'RT Podcast — AI, Doctors and Diagnosis Tools',
     venue: 'Online (YouTube Live)',
     tag: 'Live',
-    tagColor: 'bg-gold-500/15 border-gold-500/40 text-gold-700',
-    attendees: 420
+    tagColor: 'bg-gold-500/15 border-gold-500/40 text-gold-700'
   },
   {
-    date: '2026-12-15',
-    day: '15',
+    date: '2026-12-04',
+    day: '04',
     month: 'Dec',
-    title: 'Winter Blood Donation Drive',
-    venue: 'Dhanmondi + Uttara (two camps)',
+    title: 'Winter Donation Drive',
+    venue: 'Uttarbanga',
     tag: 'Impact',
-    tagColor: 'bg-jade-500/15 border-jade-500/40 text-jade-700',
-    attendees: 75
-  },
-  {
-    date: '2027-01-10',
-    day: '10',
-    month: 'Jan',
-    title: 'Business Networking Breakfast',
-    venue: 'Pan Pacific Sonargaon',
-    tag: 'Networking',
-    tagColor: 'bg-sky-500/15 border-sky-500/40 text-sky-700',
-    attendees: 60
+    tagColor: 'bg-jade-500/15 border-jade-500/40 text-jade-700'
   }
 ];
 
@@ -103,13 +103,9 @@ export default function Events() {
 
         <div className="mt-10 grid lg:grid-cols-[1.4fr_1fr] gap-10 items-start">
           <Stagger className="space-y-3" stagger={0.08}>
-            {upcoming.map((e) => (
-              <StaggerItem key={e.title}>
-                <motion.article
-                  whileHover={{ x: 6, scale: 1.005 }}
-                  transition={{ type: 'spring', stiffness: 240, damping: 20 }}
-                  className="card p-5 flex gap-5 items-center group"
-                >
+            {upcoming.map((e) => {
+              const content = (
+                <>
                   <div className="w-20 h-20 shrink-0 rounded-xl bg-cream-100 border border-cream-300 flex flex-col items-center justify-center text-center">
                     <div className="font-display text-3xl text-ember-600 leading-none tabular-nums">
                       {e.day}
@@ -125,16 +121,20 @@ export default function Events() {
                       >
                         {e.tag}
                       </span>
-                      <span className="text-[11px] text-ink-500 flex items-center gap-1">
-                        <Users size={10} /> {e.attendees} registered
-                      </span>
+                      {typeof e.attendees === 'number' && (
+                        <span className="text-[11px] text-ink-500 flex items-center gap-1">
+                          <Users size={10} /> {e.attendees} registered
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-2 font-display text-base md:text-lg text-ink-900 tracking-wide leading-snug">
                       {e.title}
                     </h3>
-                    <div className="mt-1 flex items-center gap-1 text-xs text-ink-600">
-                      <MapPin size={11} /> {e.venue}
-                    </div>
+                    {e.venue && (
+                      <div className="mt-1 flex items-center gap-1 text-xs text-ink-600">
+                        <MapPin size={11} /> {e.venue}
+                      </div>
+                    )}
                   </div>
                   <motion.div
                     whileHover={{ x: 3 }}
@@ -142,9 +142,33 @@ export default function Events() {
                   >
                     <ChevronRight size={16} />
                   </motion.div>
-                </motion.article>
-              </StaggerItem>
-            ))}
+                </>
+              );
+              const cardClass =
+                'card p-5 flex gap-5 items-center group' + (e.href ? ' cursor-pointer' : '');
+              return (
+                <StaggerItem key={e.title}>
+                  {e.href ? (
+                    <motion.a
+                      href={e.href}
+                      whileHover={{ x: 6, scale: 1.005 }}
+                      transition={{ type: 'spring', stiffness: 240, damping: 20 }}
+                      className={cardClass}
+                    >
+                      {content}
+                    </motion.a>
+                  ) : (
+                    <motion.article
+                      whileHover={{ x: 6, scale: 1.005 }}
+                      transition={{ type: 'spring', stiffness: 240, damping: 20 }}
+                      className={cardClass}
+                    >
+                      {content}
+                    </motion.article>
+                  )}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
 
           <Reveal direction="left" delay={0.15}>

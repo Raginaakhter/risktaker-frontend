@@ -1,11 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Search, Filter, Lock, Mail, Phone, MapPin, Briefcase, Droplet, X } from 'lucide-react';
+import { Search, Filter, Lock, Mail, Phone, MapPin, Briefcase, Droplet, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { members, categories, type Member, type MemberCategory } from '@/data/members';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
+
+const PAGE_SIZE = 12;
 
 const categoryAccent: Record<MemberCategory, string> = {
   Doctor: 'from-ember-500/15 to-ember-500/5 border-ember-400/40 text-ember-700',
@@ -21,6 +23,7 @@ export default function MembersDirectory() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<MemberCategory | 'All'>('All');
   const [open, setOpen] = useState<Member | null>(null);
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -38,6 +41,13 @@ export default function MembersDirectory() {
     for (const m of members) c[m.category] = (c[m.category] ?? 0) + 1;
     return c;
   }, []);
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  useEffect(() => {
+    setPage(1);
+  }, [query, category]);
+  const safePage = Math.min(page, pageCount);
+  const pagedItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   return (
     <section id="members" className="relative py-24 md:py-32">
@@ -96,15 +106,17 @@ export default function MembersDirectory() {
                 active={category === 'All'}
                 onClick={() => setCategory('All')}
               />
-              {categories.map((c) => (
-                <FilterPill
-                  key={c}
-                  label={c}
-                  count={counts[c] ?? 0}
-                  active={category === c}
-                  onClick={() => setCategory(c)}
-                />
-              ))}
+              {categories
+                .filter((c) => (counts[c] ?? 0) > 0)
+                .map((c) => (
+                  <FilterPill
+                    key={c}
+                    label={c}
+                    count={counts[c] ?? 0}
+                    active={category === c}
+                    onClick={() => setCategory(c)}
+                  />
+                ))}
             </div>
           </div>
         </Reveal>
@@ -124,12 +136,12 @@ export default function MembersDirectory() {
               </motion.div>
             ) : (
               <motion.div
-                key={`list-${category}-${query}`}
+                key={`list-${category}-${query}-${safePage}`}
                 layout
                 className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
               >
                 <AnimatePresence>
-                  {filtered.map((m, i) => (
+                  {pagedItems.map((m, i) => (
                     <motion.div
                       key={m.id}
                       layout
@@ -145,6 +157,17 @@ export default function MembersDirectory() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {filtered.length > PAGE_SIZE && (
+            <Pagination
+              page={safePage}
+              pageCount={pageCount}
+              onChange={setPage}
+              rangeStart={(safePage - 1) * PAGE_SIZE + 1}
+              rangeEnd={Math.min(safePage * PAGE_SIZE, filtered.length)}
+              total={filtered.length}
+            />
+          )}
         </div>
       </div>
 
@@ -153,6 +176,116 @@ export default function MembersDirectory() {
       </AnimatePresence>
     </section>
   );
+}
+
+function Pagination({
+  page,
+  pageCount,
+  onChange,
+  rangeStart,
+  rangeEnd,
+  total
+}: {
+  page: number;
+  pageCount: number;
+  onChange: (p: number) => void;
+  rangeStart: number;
+  rangeEnd: number;
+  total: number;
+}) {
+  const pages = pageWindow(page, pageCount);
+  const scrollToTop = () => {
+    if (typeof window === 'undefined') return;
+    const section = document.getElementById('members');
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const go = (p: number) => {
+    onChange(p);
+    scrollToTop();
+  };
+  return (
+    <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
+      <div className="text-xs uppercase tracking-widest text-ink-500 font-mono">
+        Showing <span className="text-ink-800">{rangeStart}</span>–
+        <span className="text-ink-800">{rangeEnd}</span> of{' '}
+        <span className="text-ink-800">{total}</span>
+      </div>
+      <div className="flex items-center gap-1">
+        <PageButton onClick={() => go(page - 1)} disabled={page === 1} ariaLabel="Previous page">
+          <ChevronLeft size={14} />
+        </PageButton>
+        {pages.map((p, i) =>
+          p === '…' ? (
+            <span
+              key={`gap-${i}`}
+              className="w-9 h-9 flex items-center justify-center text-ink-500 text-xs"
+            >
+              …
+            </span>
+          ) : (
+            <PageButton
+              key={p}
+              onClick={() => go(p)}
+              active={p === page}
+              ariaLabel={`Go to page ${p}`}
+              ariaCurrent={p === page ? 'page' : undefined}
+            >
+              {p}
+            </PageButton>
+          )
+        )}
+        <PageButton onClick={() => go(page + 1)} disabled={page === pageCount} ariaLabel="Next page">
+          <ChevronRight size={14} />
+        </PageButton>
+      </div>
+    </div>
+  );
+}
+
+function PageButton({
+  children,
+  onClick,
+  active,
+  disabled,
+  ariaLabel,
+  ariaCurrent
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  active?: boolean;
+  disabled?: boolean;
+  ariaLabel?: string;
+  ariaCurrent?: 'page';
+}) {
+  return (
+    <motion.button
+      whileHover={disabled ? undefined : { y: -2 }}
+      whileTap={disabled ? undefined : { scale: 0.95 }}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+      className={`min-w-[36px] h-9 px-2 rounded-full text-xs font-mono inline-flex items-center justify-center transition border ${
+        active
+          ? 'bg-ember-gradient text-white border-transparent shadow-[0_6px_18px_-6px_rgba(194,24,91,0.5)]'
+          : 'border-cream-400 bg-cream-300 text-ink-700 hover:text-ember-600 hover:border-ember-400'
+      } ${disabled ? 'opacity-40 cursor-not-allowed hover:text-ink-700 hover:border-cream-400' : ''}`}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+function pageWindow(page: number, total: number): (number | '…')[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const out: (number | '…')[] = [1];
+  const start = Math.max(2, page - 1);
+  const end = Math.min(total - 1, page + 1);
+  if (start > 2) out.push('…');
+  for (let i = start; i <= end; i++) out.push(i);
+  if (end < total - 1) out.push('…');
+  out.push(total);
+  return out;
 }
 
 function FilterPill({

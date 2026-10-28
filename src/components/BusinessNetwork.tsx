@@ -6,14 +6,14 @@ import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
 
 const industries = [
-  { icon: Stethoscope, name: 'Medical Services', count: 25, note: 'Specialists across hospitals and clinics' },
-  { icon: Building2, name: 'Banking & Finance', count: 14, note: 'Branches across Dhaka, Rajshahi, Noakhali and more' },
-  { icon: Scale, name: 'Legal Services', count: 6, note: 'Advocates and legal consultants' },
-  { icon: Code, name: 'IT & Software', count: 9, note: 'Engineering, product, data' },
-  { icon: Megaphone, name: 'Marketing & Branding', count: 5, note: 'Agencies and in-house teams' },
-  { icon: Factory, name: 'Garments & Leather', count: 7, note: 'Factories, buyers, supply chain' },
-  { icon: Globe, name: 'Import & Export', count: 4, note: 'Trade and logistics' },
-  { icon: GraduationCap, name: 'Education & Training', count: 8, note: 'Schools, universities, trainers' }
+  { icon: Stethoscope, name: 'Medical Services', note: 'Specialists across hospitals and clinics' },
+  { icon: Building2, name: 'Banking & Finance', note: 'Branches across Dhaka, Rajshahi, Noakhali and more' },
+  { icon: Scale, name: 'Legal Services', note: 'Advocates and legal consultants' },
+  { icon: Code, name: 'IT & Software', note: 'Engineering, product, data' },
+  { icon: Megaphone, name: 'Marketing & Branding', note: 'Agencies and in-house teams' },
+  { icon: Factory, name: 'Garments & Leather', note: 'Factories, buyers, supply chain' },
+  { icon: Globe, name: 'Import & Export', note: 'Trade and logistics' },
+  { icon: GraduationCap, name: 'Education & Training', note: 'Schools, universities, trainers' }
 ];
 
 const opportunities = [
@@ -48,23 +48,20 @@ export default function BusinessNetwork() {
         </Reveal>
 
         <Stagger className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.05}>
-          {industries.map(({ icon: Icon, name, count, note }) => (
+          {industries.map(({ icon: Icon, name, note }) => (
             <StaggerItem key={name}>
               <motion.div
                 whileHover={{ y: -6, scale: 1.025 }}
                 transition={{ type: 'spring', stiffness: 240, damping: 18 }}
                 className="card p-5 group h-full"
               >
-                <div className="flex items-center justify-between">
-                  <motion.div
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                    className="w-11 h-11 rounded-xl bg-ember-500/10 border border-ember-400/40 flex items-center justify-center text-ember-600 group-hover:bg-ember-500/15 transition"
-                  >
-                    <Icon size={18} />
-                  </motion.div>
-                  <div className="font-mono text-xs text-ink-500 tabular-nums">{count} members</div>
-                </div>
+                <motion.div
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="w-11 h-11 rounded-xl bg-ember-500/10 border border-ember-400/40 flex items-center justify-center text-ember-600 group-hover:bg-ember-500/15 transition"
+                >
+                  <Icon size={18} />
+                </motion.div>
                 <div className="mt-4 font-display tracking-wide text-ink-900 text-base uppercase">
                   {name}
                 </div>
