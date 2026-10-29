@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Camera, PlayCircle } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
-import { CLD } from '@/lib/cloudinary';
+import { galleryImages } from '@/lib/cloudinary';
 
 type Tile = {
   title: string;
@@ -14,16 +14,11 @@ type Tile = {
 };
 
 const tiles: Tile[] = [
-  {
-    title: 'Leadership Summit 2025 — Opening Keynote',
-    src: CLD.summit,
-    big: true
-  },
-  { title: 'Fruit Festival', src: '/slides/IMG_7452.JPG' },
-  { title: 'Mother’s Day Special', src: CLD.slide1 },
-  { title: 'Reunion Night', src: '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg' },
-  { title: 'Blood Donation Camp — Dhanmondi', src: '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg' },
-  { title: 'RT Podcast — Studio Day', src: '/slides/377A74A9-802E-481A-AA69-B07360A9C7EC.jpg' }
+  { title: 'Mother’s Day Celebration', src: galleryImages[0], big: true },
+  { title: 'Risk Taker Quarter Marathon', src: galleryImages[1] },
+  { title: 'Members Gathering', src: galleryImages[2] },
+  { title: 'Live Music Evening', src: galleryImages[3] },
+  { title: 'Mother’s Day — Cake Cutting', src: galleryImages[4] }
 ];
 
 const headlines = [

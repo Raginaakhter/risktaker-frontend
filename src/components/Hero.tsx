@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
+import { heroSlides } from '@/lib/cloudinary';
 
 type Slide = {
   src: string;
@@ -15,7 +16,7 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: '/slide/0.jpeg',
+    src: heroSlides[0],
     alt: 'RT2000 Mother’s Day celebration',
     eyebrow: 'SSC 2000 — Alumni Platform',
     title: (
@@ -30,7 +31,7 @@ const slides: Slide[] = [
     copy: 'A friendship that grew into a family — honoring our mothers, our bonds, and a legacy built together.'
   },
   {
-    src: '/slide/01.jpeg',
+    src: heroSlides[1],
     alt: 'RT2000 members networking',
     eyebrow: 'Business · Network · Growth',
     title: (
@@ -45,7 +46,7 @@ const slides: Slide[] = [
     copy: '60+ members across 12 industries building ventures, sharing deals, and lifting each other up.'
   },
   {
-    src: '/slide/02.jpeg',
+    src: heroSlides[2],
     alt: 'RT2000 learning and sharing',
     eyebrow: 'Learn · Teach · Share',
     title: (
@@ -60,7 +61,7 @@ const slides: Slide[] = [
     copy: 'Podcasts, mentorship, and knowledge hubs — the batch of 2000 keeps learning, together.'
   },
   {
-    src: '/slide/03.jpeg',
+    src: heroSlides[3],
     alt: 'RT2000 community service',
     eyebrow: 'Impact · Service · Legacy',
     title: (
@@ -73,7 +74,7 @@ const slides: Slide[] = [
     copy: 'From health camps to scholarships — real work, real reach, real change in the community.'
   },
   {
-    src: '/slide/04.jpeg',
+    src: heroSlides[4],
     alt: 'RT2000 reunion gathering',
     eyebrow: 'Events · Reunions · Celebrations',
     title: (

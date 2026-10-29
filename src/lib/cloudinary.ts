@@ -23,3 +23,17 @@ export const CLD = {
   slide1: cldImg('slides/slide-1', { w: 1920 }),
   summit: cldImg('slides/difference-summit', { w: 1920 })
 };
+
+export const heroSlides: string[] = ['0', '01', '02', '03', '04'].map((n) =>
+  cldImg(`slide/${n}`, { w: 1920 })
+);
+
+export const summitCarousel: string[] = Array.from({ length: 11 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return cldImg(`summit-carousel/${n}`, { w: 1600 });
+});
+
+export const galleryImages: string[] = Array.from({ length: 5 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return cldImg(`gallery/${n}`, { w: 1200 });
+});

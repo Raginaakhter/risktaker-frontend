@@ -29,8 +29,8 @@ const upcoming: EventItem[] = [
     href: '/events/leadership-summit-2026'
   },
   {
-    date: '2026-11-05',
-    day: '05',
+    date: '2026-11-12',
+    day: '12',
     month: 'Nov',
     title: 'RT Podcast — AI, Doctors and Diagnosis Tools',
     venue: 'Online (YouTube Live)',

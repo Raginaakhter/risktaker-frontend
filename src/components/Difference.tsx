@@ -7,11 +7,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Sprout, UsersRound, Compass, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
+import { summitCarousel } from '@/lib/cloudinary';
 
-const summitSlides = Array.from({ length: 14 }, (_, i) => {
-  const n = String(i + 1).padStart(2, '0');
-  return `/summit-carousel/${n}.jpg`;
-});
+const summitSlides = summitCarousel;
 const SUMMIT_AUTOPLAY_MS = 4500;
 
 const ThreeShowcase = dynamic(() => import('./ThreeShowcase'), { ssr: false });
