@@ -35,7 +35,8 @@ const upcoming: EventItem[] = [
     title: 'RT Podcast — AI, Doctors and Diagnosis Tools',
     venue: 'Online (YouTube Live)',
     tag: 'Live',
-    tagColor: 'bg-gold-500/15 border-gold-500/40 text-gold-700'
+    tagColor: 'bg-gold-500/15 border-gold-500/40 text-gold-700',
+    href: '/#podcast'
   },
   {
     date: '2026-12-04',
@@ -46,13 +47,6 @@ const upcoming: EventItem[] = [
     tag: 'Impact',
     tagColor: 'bg-jade-500/15 border-jade-500/40 text-jade-700'
   }
-];
-
-const past = [
-  { name: 'Fruit Festival 2026', count: '220+ attended' },
-  { name: 'Mother\'s Day Special', count: '150+ attended' },
-  { name: 'Reunion Night', count: '340+ attended' },
-  { name: 'AI Workshop for Members', count: '80+ attended' }
 ];
 
 export default function Events() {
@@ -198,17 +192,6 @@ export default function Events() {
                 ))}
               </div>
 
-              <div className="mt-7 pt-6 border-t border-cream-300">
-                <div className="eyebrow !tracking-[0.22em] !text-[10px]">Past, in short</div>
-                <ul className="mt-3 space-y-2 text-xs text-ink-600">
-                  {past.map((p) => (
-                    <li key={p.name} className="flex justify-between tabular-nums">
-                      <span>{p.name}</span>
-                      <span className="text-ember-600">{p.count}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </aside>
           </Reveal>
         </div>

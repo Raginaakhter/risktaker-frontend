@@ -6,7 +6,6 @@ import MembersDirectory from '@/components/MembersDirectory';
 import BusinessNetwork from '@/components/BusinessNetwork';
 import Podcast from '@/components/Podcast';
 import Events from '@/components/Events';
-import KnowledgeHub from '@/components/KnowledgeHub';
 import SocialImpact from '@/components/SocialImpact';
 import Gallery from '@/components/Gallery';
 import JoinUs from '@/components/JoinUs';
@@ -23,7 +22,6 @@ export default function HomePage() {
       <BusinessNetwork />
       <Podcast />
       <Events />
-      <KnowledgeHub />
       <SocialImpact />
       <Gallery />
       <JoinUs />

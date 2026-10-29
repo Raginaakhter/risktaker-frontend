@@ -4,8 +4,6 @@ import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
-import Counter from './motion/Counter';
-import { CLD } from '@/lib/cloudinary';
 
 type Slide = {
   src: string;
@@ -17,7 +15,7 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: CLD.slide1,
+    src: '/slide/0.jpeg',
     alt: 'RT2000 Mother’s Day celebration',
     eyebrow: 'SSC 2000 — Alumni Platform',
     title: (
@@ -32,7 +30,7 @@ const slides: Slide[] = [
     copy: 'A friendship that grew into a family — honoring our mothers, our bonds, and a legacy built together.'
   },
   {
-    src: '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg',
+    src: '/slide/01.jpeg',
     alt: 'RT2000 members networking',
     eyebrow: 'Business · Network · Growth',
     title: (
@@ -47,7 +45,7 @@ const slides: Slide[] = [
     copy: '60+ members across 12 industries building ventures, sharing deals, and lifting each other up.'
   },
   {
-    src: '/slides/IMG_7461.JPG',
+    src: '/slide/02.jpeg',
     alt: 'RT2000 learning and sharing',
     eyebrow: 'Learn · Teach · Share',
     title: (
@@ -62,7 +60,7 @@ const slides: Slide[] = [
     copy: 'Podcasts, mentorship, and knowledge hubs — the batch of 2000 keeps learning, together.'
   },
   {
-    src: '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg',
+    src: '/slide/03.jpeg',
     alt: 'RT2000 community service',
     eyebrow: 'Impact · Service · Legacy',
     title: (
@@ -75,7 +73,7 @@ const slides: Slide[] = [
     copy: 'From health camps to scholarships — real work, real reach, real change in the community.'
   },
   {
-    src: '/slides/IMG_7452.JPG',
+    src: '/slide/04.jpeg',
     alt: 'RT2000 reunion gathering',
     eyebrow: 'Events · Reunions · Celebrations',
     title: (
@@ -188,16 +186,6 @@ export default function Hero() {
             </motion.div>
           </AnimatePresence>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.7 }}
-            className="mt-12 grid grid-cols-3 gap-6 max-w-md"
-          >
-            <Stat value={60} suffix="+" label="Members" />
-            <Stat value={12} label="Industries" />
-            <Stat value={25} suffix="+" label="Doctors" />
-          </motion.div>
         </div>
       </div>
 
@@ -256,15 +244,3 @@ export default function Hero() {
   );
 }
 
-function Stat({ value, suffix, label }: { value: number; suffix?: string; label: string }) {
-  return (
-    <div className="border-l-2 border-gold-400/70 pl-4">
-      <Counter
-        value={value}
-        suffix={suffix}
-        className="font-display text-3xl md:text-4xl text-white tracking-tight block"
-      />
-      <div className="text-[11px] uppercase tracking-[0.25em] text-white/70 mt-1">{label}</div>
-    </div>
-  );
-}

@@ -7,16 +7,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Sprout, UsersRound, Compass, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reveal from './motion/Reveal';
 import { Stagger, StaggerItem } from './motion/Stagger';
-import { CLD } from '@/lib/cloudinary';
 
-const summitSlides = [
-  CLD.summit,
-  CLD.slide1,
-  '/slides/0b518bfe-2e23-4892-a414-22573cb00a10.jpg',
-  '/slides/236cf375-fbe5-4308-a563-d1571c4d52a4.jpg',
-  '/slides/IMG_7452.JPG',
-  '/slides/IMG_7461.JPG'
-];
+const summitSlides = Array.from({ length: 14 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return `/summit-carousel/${n}.jpg`;
+});
 const SUMMIT_AUTOPLAY_MS = 4500;
 
 const ThreeShowcase = dynamic(() => import('./ThreeShowcase'), { ssr: false });

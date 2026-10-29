@@ -27,10 +27,11 @@ const tiles: Tile[] = [
 ];
 
 const headlines = [
-  { title: 'RT 2000 Launches Digital Member Directory', date: '20 Oct 2026' },
-  { title: 'Winter Blood Drive — Volunteers Needed', date: '14 Oct 2026' },
-  { title: '2026 Leadership Summit Theme Announced', date: '02 Oct 2026' },
-  { title: 'Member Dr. Riyad Mahmud Named Fellow of Cardiac Society', date: '28 Sep 2026' }
+  'Risk Taker Leadership Summit 2026',
+  'Risk Taker Club Introduce Soon',
+  'Risk Taker Podcast',
+  'Training for Next Generation',
+  'Members Database Update'
 ];
 
 export default function Gallery() {
@@ -73,20 +74,13 @@ export default function Gallery() {
               <div className="mt-5 card divide-y divide-cream-300">
                 {headlines.map((h) => (
                   <motion.div
-                    key={h.title}
+                    key={h}
                     whileHover={{ x: 4 }}
-                    className="p-5 flex items-start gap-4 transition cursor-pointer hover:bg-cream-300/50"
+                    className="p-5 flex items-center gap-4 transition cursor-pointer hover:bg-cream-300/50"
                   >
-                    <div className="shrink-0 w-10 h-10 rounded-lg border border-ember-500/40 bg-ember-500/5 text-ember-600 flex items-center justify-center text-[10px] font-display tabular-nums">
-                      {h.date.split(' ')[0]}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-display text-sm text-ink-900 tracking-wide leading-snug">
-                        {h.title}
-                      </div>
-                      <div className="mt-1 text-[11px] uppercase tracking-widest text-ink-500">
-                        {h.date}
-                      </div>
+                    <span className="shrink-0 w-2 h-2 rounded-full bg-ember-500" />
+                    <div className="font-display text-sm text-ink-900 tracking-wide leading-snug">
+                      {h}
                     </div>
                   </motion.div>
                 ))}

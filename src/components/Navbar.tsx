@@ -23,7 +23,6 @@ const nav: NavItem[] = [
   { label: 'Business', href: '/#business' },
   { label: 'Podcast', href: '/#podcast' },
   { label: 'Events', href: '/#events' },
-  { label: 'Knowledge', href: '/#knowledge' },
   { label: 'Impact', href: '/#impact' }
 ];
 
